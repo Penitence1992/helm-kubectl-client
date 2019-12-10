@@ -1,0 +1,17 @@
+sudo: required
+
+env:
+  IMAGE=penitence/helm-kubectl-client
+  TAG=1.0.0
+
+services:
+  - docker
+
+script:
+  - docker build --build-arg BASE_IMAGE=$BASE_IMAGE -t $IMAGE:$TAG .
+  - docker tag $IMAGE:$TAG $IMAGE:latest
+
+after_success:
+  - docker login -u="$USERNAME" -p="$PASSWORD"
+  - docker push $IMAGE:$TAG
+  - docker push $IMAGE:latest
