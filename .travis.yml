@@ -9,15 +9,14 @@ env:
   jobs:
     - TAG=1.0.0 BASE_IMAGE=alpine:3.9
     - TAG=1.0.0-jre BASE_IMAGE=openjdk:8-alpine3.9
+    - TAG=latest BASE_IMAGE=alpine:3.9
 
 services:
   - docker
 
 script:
   - docker build --build-arg BASE_IMAGE=$BASE_IMAGE -t $IMAGE:$TAG .
-  - docker tag $IMAGE:$TAG $IMAGE:latest
 
 after_success:
   - docker login -u="$USERNAME" -p="$PASSWORD"
   - docker push $IMAGE:$TAG
-  - docker push $IMAGE:latest
