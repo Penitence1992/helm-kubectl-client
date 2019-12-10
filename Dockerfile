@@ -5,7 +5,7 @@ ARG kubectl_version=1.16.3
 
 ENV KUBECTL_VERSION=${kubectl_version} HELM_VERSION=${helm_version}
 
-RUN wget -q https://dl.k8s.io/v${kubectl_version}/kubernetes-client-linux-arm64.tar.gz -O - | tar -zxO kubernetes/client/bin/kubectl > /usr/local/bin/kubectl \
+RUN wget -q https://dl.k8s.io/v${kubectl_version}/kubernetes-client-linux-amd64.tar.gz -O - | tar -zxO kubernetes/client/bin/kubectl > /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl \
     && wget -q https://get.helm.sh/helm-v${helm_version}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm
