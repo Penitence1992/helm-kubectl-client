@@ -1,4 +1,4 @@
-# 容器管理平台基础环境镜像
+# 容器管理平台基础环境镜像 [![Build Status](https://travis-ci.org/Penitence1992/helm-kubectl-client.svg?branch=master)](https://travis-ci.org/Penitence1992/helm-kubectl-client)
 
 用于提供给容器管理服务使用的镜像, 
 
