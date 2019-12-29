@@ -7,9 +7,9 @@ env:
   global:
     - IMAGE=penitence/helm-kubectl-client
   jobs:
-    - TAG=1.0.0 BASE_IMAGE=alpine:3.9
-    - TAG=1.0.0-jre BASE_IMAGE=openjdk:8-alpine3.9
-    - TAG=latest BASE_IMAGE=alpine:3.9
+    - TAG=1.0.1 BASE_IMAGE=alpine:3.9 helm_version=3.0.2
+    - TAG=1.0.1-jre BASE_IMAGE=openjdk:8-alpine3.9 helm_version=3.0.2
+    - TAG=latest BASE_IMAGE=alpine:3.9 helm_version=3.0.2
 
 services:
   - docker
