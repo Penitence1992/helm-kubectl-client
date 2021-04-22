@@ -7,21 +7,16 @@ env:
   global:
     - IMAGE=penitence/helm-kubectl-client
   jobs:
-    - TAG=1.3.0 BASE_IMAGE=alpine:3.9 helm_version=3.4.2
-    - TAG=1.3.0-jre BASE_IMAGE=openjdk:8-alpine3.9 helm_version=3.4.2
-    - TAG=1.3.0-jre11 BASE_IMAGE=openjdk:11-jre helm_version=3.4.2 OS=Debian
-    - TAG=latest BASE_IMAGE=alpine:3.9 helm_version=3.4.2
+    - TAG=1.3.0 BASE_IMAGE=alpine:3.9 helm_version=3.4.2 File=Dockerfile
+    - TAG=1.3.0-jre BASE_IMAGE=openjdk:8-alpine3.9 helm_version=3.4.2 File=Dockerfile
+    - TAG=1.3.0-jre11 BASE_IMAGE=openjdk:11-jre helm_version=3.4.2 File=Dockerfile-Debian
+    - TAG=latest BASE_IMAGE=alpine:3.9 helm_version=3.4.2 File=Dockerfile
 
 services:
   - docker
 
 script:
-  - |
-    if [[ $OS -eq "Debian" ]] ; then
-      docker build --build-arg BASE_IMAGE=$BASE_IMAGE --build-arg helm_version=$helm_version -t $IMAGE:$TAG -f Dockerfile-Debian
-    else
-      docker build --build-arg BASE_IMAGE=$BASE_IMAGE --build-arg helm_version=$helm_version -t $IMAGE:$TAG .
-    fi
+  - docker build --build-arg BASE_IMAGE=$BASE_IMAGE --build-arg helm_version=$helm_version -t $IMAGE:$TAG -f $File .
 
 after_success:
   - docker login -u="$USERNAME" -p="$PASSWORD"
